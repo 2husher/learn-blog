@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-    before_filter :load_article, :except => :destroy
-    before_filter :authenticate, :only => :destroy
+    before_filter :load_article, except: :destroy
+    before_filter :authenticate, only: :destroy
      
     def create
         @comment = @article.comments.new(comment_params)
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
         else
             respond_to do |format|
                 format.html { redirect_to @article, alert: 'Unable to add comment' }
-                format.js{ render 'fail_create.js.erb' }
+                format.js { render 'fail_create.js.erb' }
             end
         end
     end

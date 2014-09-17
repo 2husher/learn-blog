@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         if @user.save
             redirect_to articles_path, notice: 'User successfully added.'
         else
-            render action: :new
+            render action: 'new'
         end
     end
 
