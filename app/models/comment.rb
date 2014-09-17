@@ -5,6 +5,8 @@ class Comment < ActiveRecord::Base
     validate :article_should_be_published
 
     after_create :email_article_author
+    
+    after_create :send_comment_email
 
     def article_should_be_published
         errors.add(:article_id, "is not published yet") if article && !article.published?
@@ -12,5 +14,9 @@ class Comment < ActiveRecord::Base
 
     def email_article_author
         puts "We will notify #{article.user.email} in Chapter 9"
+    end
+
+    def send_comment_email
+        Notifier.comment_added(self).deliver
     end
 end
