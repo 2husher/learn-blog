@@ -4,18 +4,18 @@ class User < ActiveRecord::Base
     before_save :encrypt_new_password
     
     has_one :profile
-    has_many :articles, -> { order('published_at DESC, title ASC') }, :dependent => :nullify
-    has_many :replies, :through => :articles, :source => :comments
+    has_many :articles, -> { order('published_at DESC, title ASC') }, dependent: :nullify
+    has_many :replies, through: :articles, source: :comments
 
     attr_accessor :password
     
     validates_uniqueness_of :email
-    validates_length_of :email, :within => 5..50
-    validates_format_of :email, :with => /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i
+    validates_length_of :email, within: 5..50
+    validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i
     
     validates_confirmation_of :password
-    validates_length_of :password, :within => 4..20
-    validates_presence_of :password, :if => :password_required?
+    validates_length_of :password, within: 4..20
+    validates_presence_of :password, if: :password_required?
  
     def self.authenticate(email, password)
         user = find_by_email(email)

@@ -1,0 +1,20 @@
+firstcomment:
+  name: Rails is the framework of the future
+  email: some.email@gmail.com
+  body: |
+    Rails is the framework of the future. And I think that Ruby on Rails is intended to emphasize Convention over Configuration (CoC), and the Don't Repeat Yourself (DRY) principle.
+    "Convention over Configuration" means a developer only needs to specify unconventional aspects of the application. For example, if there is a class Sale in the model, the corresponding table in the database is called sales by default. It is only if one deviates from this convention, such as calling the table "products sold", that the developer needs to write code regarding these names. Generally, Ruby on Rails conventions lead to less code and less repetition.
+    "Don't repeat yourself" means that information is located in a single, unambiguous place. For example, using the ActiveRecord module of Rails, the developer does not need to specify database column names in class definitions. Instead, Ruby on Rails can retrieve this information from the database based on the class name.
+    "Fat models, skinny controllers" means that most of the application logic should be placed within the model while leaving the controller as light as possible.
+  article: rails
+  created_at: <%= Time.now - 1.day %>
+
+secondcomment:
+  name: Ruby on Rails is not good
+  email: another.email@gmail.com
+  body: |
+    Drupal is better.
+    Drupal is a free and open-source content-management framework written in PHP and distributed under the GNU General Public License.It is used as a back-end framework for at least 2.1% of all Web sites worldwide ranging from personal blogs to corporate, political, and government sites including WhiteHouse.gov and data.gov.uk. It is also used for knowledge management and business collaboration.
+    The standard release of Drupal, known as Drupal core, contains basic features common to content management systems. These include user account registration and maintenance, menu management, RSS feeds, taxonomy, page layout customization, and system administration. The Drupal core installation can serve as a simple Web site, a single- or multi-user blog, an Internet forum, or a community Web site providing for user-generated content.
+  article: rails
+  created_at: <%= Time.now - 2.days %>

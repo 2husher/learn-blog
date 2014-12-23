@@ -20,7 +20,12 @@ class ApplicationController < ActionController::Base
         # Filter method to enforce a login requirement
         # Apply as a before_action on any controller you want to protect
         def authenticate
-            logged_in? || access_denied
+            #logged_in? || access_denied
+            if logged_in?
+                return true
+            else
+                redirect_to login_path, notice: "Please log in to continue" and return false
+            end
         end
       
         # Predicate method to test for a logged in user

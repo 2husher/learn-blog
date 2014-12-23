@@ -1,0 +1,7 @@
+%html
+  %body
+    %p
+      Someone added a comment to one of your articles
+      = succeed "." do
+        %i= @article.title
+      Go read the comment: #{link_to @article.title, article_url(@article, host: 'localhost:3000')}.

@@ -1,0 +1,11 @@
+webprogramming:
+  name: Web Programming
+  articles: rails, js
+
+scripting:
+  name: Script Language
+  articles: ruby, js
+
+webframework:
+  name: Web Framework
+  articles: rails
