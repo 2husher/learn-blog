@@ -18,7 +18,9 @@ class Article < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :comments
 
-  validates_presence_of :title, :body
+  validates :title, presence: true
+  validates :body, presence: true
+  validates :user, presence: true
 
   scope :published,   -> { where("published_at IS NOT NULL") }
   scope :draft,       -> { where("published_at IS NULL") }
