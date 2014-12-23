@@ -20,13 +20,14 @@ class User < ActiveRecord::Base
 
   attr_accessor :password
 
-  validates_uniqueness_of :email
-  validates_length_of :email, within: 5..50
-  validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i
+  validates :email, uniqueness: true,
+                    length: { within: 5..50 },
+                    format: { with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
 
-  validates_confirmation_of :password
-  validates_length_of :password, within: 4..20
-  validates_presence_of :password, if: :password_required?
+  validates :password, confirmation: true,
+                       length: { within: 4..20 },
+                       presence: true,
+                       if: :password_required?
 
   def self.authenticate(email, password)
     user = find_by_email(email)
