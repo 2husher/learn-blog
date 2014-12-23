@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: articles
+#
+#  id           :integer          not null, primary key
+#  title        :string(255)
+#  body         :text
+#  published_at :datetime
+#  created_at   :datetime
+#  updated_at   :datetime
+#  excerpt      :string(255)
+#  location     :string(255)
+#  user_id      :integer
+#
+
 rails:
   title: Ruby on Rails
   body: |
@@ -38,5 +53,5 @@ js:
   excerpt:
   location:
   created_at: <%= Time.now - 1.day %>
-  published_at: <%= Time.now - 1.day %>
+  published_at:
   user: alexizotov

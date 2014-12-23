@@ -1,14 +1,33 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id         :integer          not null, primary key
+#  article_id :integer
+#  name       :string(255)
+#  email      :string(255)
+#  body       :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Comment < ActiveRecord::Base
   after_create :email_article_author
   after_create :send_comment_email
 
   belongs_to :article
 
-  validates_presence_of :name, :email, :body
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :body, presence: true
+  validates :article, presence: true
+
   validate :article_should_be_published
 
   def article_should_be_published
-    errors.add(:article_id, "is not published yet") if article && !article.published?
+    if article.present? && !article.published?
+      errors.add(:article_id, "is not published yet")
+    end
   end
 
   def email_article_author

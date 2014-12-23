@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'haml'
 gem 'html2haml'
+gem 'annotate'
 
 gem 'rails', '4.1.8'
 gem 'sqlite3'
