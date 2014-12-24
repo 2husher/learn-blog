@@ -1,84 +1,60 @@
 class ArticlesController < ApplicationController
   before_action :authenticate, except: [:index, :show]
-  before_action :set_article, only: [:show]
+  before_action :set_current_user_article, only: [:edit, :update, :destroy]
+  before_action :set_article, only: [:show, :notify_friend]
 
-  # GET /articles
-  # GET /articles.json
   def index
     @articles = Article.all
   end
 
-  # GET /articles/1
-  # GET /articles/1.json
   def show
   end
 
-  # GET /articles/new
   def new
     @article = Article.new
   end
 
-  # GET /articles/1/edit
-  def edit
-      @article = current_user.articles.find(params[:id])
-  end
-
-  # POST /articles
-  # POST /articles.json
   def create
     @article = current_user.articles.new(article_params)
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @article }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save
+      redirect_to @article, notice: 'Article was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
+  def edit
+  end
+
   def update
-    @article = current_user.articles.find(params[:id])
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.update(article_params)
+      redirect_to @article, notice: 'Article was successfully updated.'
+    else
+      render :edit
     end
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
-    @article = current_user.articles.find(params[:id])
     @article.destroy
-    respond_to do |format|
-      format.html { redirect_to articles_url }
-      format.json { head :no_content }
-    end
+    redirect_to articles_url
   end
 
   def notify_friend
-    @article = Article.find(params[:id])
     Notifier.email_friend(@article, params[:name], params[:email]).deliver
     redirect_to @article, notice: "Successfully sent a message to your friend"
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def article_params
+      params[:article].permit(:title, :location, :excerpt, :body, :published_at, category_ids: [])
+    end
+
     def set_article
       @article = Article.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def article_params
-      params.require(:article).permit(:title, :location, :excerpt, :body, :published_at, :category_ids => [])
+    def set_current_user_article
+      @article = current_user.articles.find(params[:id])
     end
 end
