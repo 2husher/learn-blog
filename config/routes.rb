@@ -6,8 +6,8 @@ Blog::Application.routes.draw do
         end
         resources :comments, only: [:create, :destroy]
     end
-    resources :users
-    resource :session, only: [:new, :create, :destroy]
+    resources :users, only: [:new, :create, :edit, :update]
+    resource :session, only: [:create, :destroy]
     get '/login'  => "sessions#new",     as: "login"
     get '/logout' => "sessions#destroy", as: "logout"
 end
