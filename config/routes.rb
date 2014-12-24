@@ -4,7 +4,7 @@ Blog::Application.routes.draw do
         member do
             post :notify_friend
         end
-        resources :comments
+        resources :comments, only: [:create, :destroy]
     end
     resources :users
     resource :session, only: [:new, :create, :destroy]
