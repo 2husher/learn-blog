@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
                        if: :password_required?
 
   def self.authenticate(email, password)
+    # check user by email and user with email has password
     user = find_by(email: email)
     return user if user && user.authenticated?(password)
   end
