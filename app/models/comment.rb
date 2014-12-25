@@ -35,6 +35,6 @@ class Comment < ActiveRecord::Base
   end
 
   def send_comment_email
-    Notifier.comment_added(self).deliver
+    #Notifier.comment_added(self).deliver
   end
 end

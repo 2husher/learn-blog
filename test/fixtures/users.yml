@@ -11,8 +11,8 @@
 
 alexizotov:
   email: martinandrudy@gmail.com
-  hashed_password: password
+  hashed_password: <%= Digest::SHA1.hexdigest("password") %>
 
 dimakomissar:
   email: dk@gmail.com
-  hashed_password: password
+  hashed_password: <%= Digest::SHA1.hexdigest("password") %>

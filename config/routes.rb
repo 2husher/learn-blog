@@ -5,7 +5,7 @@ Blog::Application.routes.draw do
     member do
       post :notify_friend
     end
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:new, :create, :destroy]
   end
 
   resources :users, only: [:new, :create, :edit, :update]
